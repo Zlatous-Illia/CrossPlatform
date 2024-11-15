@@ -5,7 +5,7 @@ namespace Lab1
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             try
             {
@@ -16,6 +16,16 @@ namespace Lab1
 
                 // Чтение данных из входного файла
                 string[] inputData = GetDataFromFile(inputPath);
+
+                // Проверка входных данных
+                string validationError = ValidateInput(inputData);
+                if (validationError != null)
+                {
+                    Console.WriteLine(validationError);
+                    return;
+                }
+
+                // Попытка преобразовать данные в число
                 int x = int.Parse(inputData[0].Trim());
 
                 // Получение количества решений
@@ -24,14 +34,15 @@ namespace Lab1
                 // Запись результата в выходной файл
                 File.WriteAllText(outputPath, result.ToString());
 
-                Console.WriteLine($"Количество способов представления {x} как суммы четырех чисел: {result}");
+                Console.WriteLine($"The number of ways to represent {x} as a sum of four integers: {result}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка: {ex.Message}");
+                Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
 
+        // Метод для вычисления количества способов представления x как суммы четырех чисел
         public static int GetWaysToRepresentAsSum(int x)
         {
             int count = 0;
@@ -58,7 +69,38 @@ namespace Lab1
         // Метод для чтения данных из файла
         public static string[] GetDataFromFile(string path)
         {
+            // Проверка существования файла
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"Error: The input file '{path}' does not exist.");
+                return Array.Empty<string>();
+            }
+
             return File.ReadAllLines(path);
+        }
+
+        // Метод для проверки входных данных
+        public static string ValidateInput(string[] inputData)
+        {
+            // Проверка на наличие данных в файле
+            if (inputData.Length == 0)
+            {
+                return "Error: The input file is empty.";
+            }
+
+            // Попытка преобразовать данные в число
+            if (!int.TryParse(inputData[0].Trim(), out int x))
+            {
+                return "Error: The input data is not a valid integer.";
+            }
+
+            // Проверка диапазона числа x
+            if (x < 1 || x > 1500)
+            {
+                return "Error: The number x must be in the range 1 ≤ x ≤ 1500.";
+            }
+
+            return null; // Если все проверки прошли успешно
         }
     }
 }
