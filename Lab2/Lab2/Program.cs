@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Lab2.xUnitTests")]
 
 namespace Lab2
 {
@@ -10,7 +13,7 @@ namespace Lab2
         const int COLS_TOTAL_MAX = 70;
 
         // Игровое поле и таблица для подсчета вариантов
-        static int[,] field = new int[ROWS_TOTAL_MAX, COLS_TOTAL_MAX];
+        internal static int[,] field = new int[ROWS_TOTAL_MAX, COLS_TOTAL_MAX];
         static long[,] variantsCounter = new long[ROWS_TOTAL_MAX, COLS_TOTAL_MAX];
 
         public static void Main(string[] args)
@@ -28,13 +31,13 @@ namespace Lab2
                 // Проверка и чтение размеров поля
                 if (!ValidateDimensions(inputData[0], out int rowsTotal, out int colsTotal))
                 {
-                    throw new Exception("Некорректные размеры поля.");
+                    throw new Exception("Incorrect field dimensions.");
                 }
 
                 // Проверка и заполнение игрового поля
                 if (!ValidateAndFillField(inputData, rowsTotal, colsTotal))
                 {
-                    throw new Exception("Некорректные данные игрового поля.");
+                    throw new Exception("Incorrect field data.");
                 }
 
                 // Получение количества вариантов путей
