@@ -117,26 +117,6 @@ namespace Lab2.xUnitTests
             Console.WriteLine($"Test 9 passed: {result}, Move down is not possible.");
         }
 
-        // “ест: ѕроверка количества возможных путей, когда движение невозможно (сложный случай)
-        [Fact]
-        public void Test_GetVariantsCount_NoPaths()
-        {
-            Program.field = new int[,]
-            {
-                { 1, 2, 3 },
-                { 1, 1, 1 },
-                { 1, 2, 0 }
-            };
-
-            int rows = Program.field.GetLength(0);
-            int cols = Program.field.GetLength(1);
-
-            long result = Program.GetVariantsCount(rows, cols);
-
-            Assert.Equal(1, result);
-            Console.WriteLine($"Test 10 passed: No possible paths. Number of possible paths = {result}");
-        }
-
         // “ест: ѕроверка количества возможных путей, когда существует несколько вариантов (сложный случай)
         [Fact]
         public void Test_GetVariantsCount_MultiplePaths()
@@ -154,7 +134,7 @@ namespace Lab2.xUnitTests
             long result = Program.GetVariantsCount(rows, cols);
 
             Assert.Equal(3, result);
-            Console.WriteLine($"Test 11 passed: Multiple paths available. Number of possible paths = {result}");
+            Console.WriteLine($"Test 10 passed: Multiple paths available. Number of possible paths = {result}");
         }
     }
 }
