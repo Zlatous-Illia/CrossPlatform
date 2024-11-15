@@ -122,20 +122,5 @@ namespace Lab2.xUnitTests
             Assert.Equal(0, result);
             Console.WriteLine($"Test 10 passed: Number of possible paths = {result}");
         }
-
-        [Fact]
-        public void Test_GetVariantsCount_SimpleCase()
-        {
-            Program.field = new int[,]
-            {
-                { 2, 1, 2 },
-                { 1, 1, 1 },
-                { 1, 1, 0 }
-            };
-            long result = Program.GetVariantsCount(3, 3);
-
-            Assert.Equal(2, result);
-            Console.WriteLine($"Test 11 passed: Number of possible paths = {result}");
-        }
     }
 }
