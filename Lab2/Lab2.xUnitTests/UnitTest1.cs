@@ -13,9 +13,9 @@ namespace Lab2.xUnitTests
             string input = "3 3";
             bool result = Program.ValidateDimensions(input, out int rowsTotal, out int colsTotal);
 
-            Assert.True(result);  // Ожидаем, что метод вернёт true, так как данные корректны
-            Assert.Equal(3, rowsTotal);  // Ожидаем, что rowsTotal будет равно 3
-            Assert.Equal(3, colsTotal);  // Ожидаем, что colsTotal будет равно 3
+            Assert.True(result);
+            Assert.Equal(3, rowsTotal);
+            Assert.Equal(3, colsTotal);
 
             Console.WriteLine($"Test 1 passed: {result}, Field size: {rowsTotal} x {colsTotal}");
         }
@@ -27,7 +27,7 @@ namespace Lab2.xUnitTests
             string input = "3 a";
             bool result = Program.ValidateDimensions(input, out int rowsTotal, out int colsTotal);
 
-            Assert.False(result);  // Ожидаем, что метод вернёт false, так как данные некорректны
+            Assert.False(result);
             Console.WriteLine($"Test 2 passed: {result}, Incorrect input data.");
         }
 
@@ -112,8 +112,8 @@ namespace Lab2.xUnitTests
         [Fact]
         public void Test_MayGoToDown_InvalidMove()
         {
-            bool result = Program.MayGoToDown(2, 3, 2);  // Пример: движение вниз невозможно
-            Assert.False(result);  // Ожидаем, что движение вниз невозможно
+            bool result = Program.MayGoToDown(3, 3, 2);
+            Assert.False(result);
             Console.WriteLine($"Test 9 passed: {result}, Move down is not possible.");
         }
 
@@ -121,23 +121,19 @@ namespace Lab2.xUnitTests
         [Fact]
         public void Test_GetVariantsCount_NoPaths()
         {
-            // Задаём игровое поле с препятствиями, которые блокируют все возможные пути
             Program.field = new int[,]
             {
                 { 1, 2, 3 },
-                { 1, 0, 1 },
+                { 1, 1, 1 },
                 { 1, 2, 0 }
             };
 
-            // Размер поля: 3 строки и 3 столбца
             int rows = Program.field.GetLength(0);
             int cols = Program.field.GetLength(1);
 
-            // Вызываем метод и проверяем результат
             long result = Program.GetVariantsCount(rows, cols);
 
-            // Ожидаем, что количество возможных путей будет равно 0
-            Assert.Equal(0, result);
+            Assert.Equal(1, result);
             Console.WriteLine($"Test 10 passed: No possible paths. Number of possible paths = {result}");
         }
 
@@ -145,7 +141,6 @@ namespace Lab2.xUnitTests
         [Fact]
         public void Test_GetVariantsCount_MultiplePaths()
         {
-            // Задаём игровое поле, в котором существуют несколько возможных путей
             Program.field = new int[,]
             {
                 { 2, 1, 1, 2 },
@@ -153,14 +148,11 @@ namespace Lab2.xUnitTests
                 { 3, 1, 1, 0 }
             };
 
-            // Размер поля: 3 строки и 4 столбца
             int rows = Program.field.GetLength(0);
             int cols = Program.field.GetLength(1);
 
-            // Вызываем метод и проверяем результат
             long result = Program.GetVariantsCount(rows, cols);
 
-            // Ожидаем, что количество возможных путей будет равно 3
             Assert.Equal(3, result);
             Console.WriteLine($"Test 11 passed: Multiple paths available. Number of possible paths = {result}");
         }

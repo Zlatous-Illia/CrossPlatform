@@ -1,8 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Lab2.xUnitTests")]
 
 namespace Lab2
 {
@@ -13,7 +10,7 @@ namespace Lab2
         const int COLS_TOTAL_MAX = 70;
 
         // Игровое поле и таблица для подсчета вариантов
-        internal static int[,] field = new int[ROWS_TOTAL_MAX, COLS_TOTAL_MAX];
+        public static int[,] field = new int[ROWS_TOTAL_MAX, COLS_TOTAL_MAX]; // Публичное свойство для тестов
         static long[,] variantsCounter = new long[ROWS_TOTAL_MAX, COLS_TOTAL_MAX];
 
         public static void Main(string[] args)
@@ -31,13 +28,13 @@ namespace Lab2
                 // Проверка и чтение размеров поля
                 if (!ValidateDimensions(inputData[0], out int rowsTotal, out int colsTotal))
                 {
-                    throw new Exception("Incorrect field dimensions.");
+                    throw new Exception("Invalid field dimensions in the first line.");
                 }
 
                 // Проверка и заполнение игрового поля
                 if (!ValidateAndFillField(inputData, rowsTotal, colsTotal))
                 {
-                    throw new Exception("Incorrect field data.");
+                    throw new Exception("Invalid data in the game field.");
                 }
 
                 // Получение количества вариантов путей
@@ -46,11 +43,11 @@ namespace Lab2
                 // Запись результата в выходной файл
                 File.WriteAllText(outputPath, result.ToString());
 
-                Console.WriteLine($"Количество различных вариантов путей: {result}");
+                Console.WriteLine($"The number of possible paths: {result}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка: {ex.Message}");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 
@@ -66,11 +63,18 @@ namespace Lab2
                 !int.TryParse(dimensions[0], out rowsTotal) ||
                 !int.TryParse(dimensions[1], out colsTotal))
             {
+                Console.WriteLine("Error: The first line must contain two integers.");
                 return false;
             }
 
             // Проверка, что размеры находятся в пределах 1 ≤ N, M ≤ 70
-            return rowsTotal >= 1 && rowsTotal <= 70 && colsTotal >= 1 && colsTotal <= 70;
+            if (rowsTotal < 1 || rowsTotal > 70 || colsTotal < 1 || colsTotal > 70)
+            {
+                Console.WriteLine("Error: The dimensions must be between 1 and 70.");
+                return false;
+            }
+
+            return true;
         }
 
         // Метод проверки данных игрового поля и заполнения массива field
@@ -79,6 +83,7 @@ namespace Lab2
             // Проверка количества строк
             if (inputData.Length - 1 != rowsTotal)
             {
+                Console.WriteLine("Error: The number of rows in the input data does not match the specified dimensions.");
                 return false;
             }
 
@@ -90,14 +95,16 @@ namespace Lab2
                 // Проверка количества элементов в строке
                 if (rowData.Length != colsTotal)
                 {
+                    Console.WriteLine($"Error: Row {i + 1} does not contain the correct number of columns.");
                     return false;
                 }
 
                 for (int j = 0; j < colsTotal; j++)
                 {
-                    // Проверка, что каждый элемент — неотрицательное целое число
-                    if (!int.TryParse(rowData[j], out int cellValue) || cellValue < 0)
+                    // Проверка, что каждый элемент — неотрицательное целое число от 0 до 100
+                    if (!int.TryParse(rowData[j], out int cellValue) || cellValue < 0 || cellValue > 100)
                     {
+                        Console.WriteLine($"Error: Invalid value '{rowData[j]}' at position ({i + 1}, {j + 1}). It must be between 0 and 100.");
                         return false;
                     }
 
