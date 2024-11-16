@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Lab3
 {
@@ -24,8 +25,6 @@ namespace Lab3
             var inputLines = File.ReadAllLines(inputPath);
             var board = new string[3];
             var target = new string[3];
-
-            
         }
     }
 }
