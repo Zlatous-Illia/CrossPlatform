@@ -1,8 +1,8 @@
 # Варіант 50 
-Build.proj
-dotnet build Build.proj -p:Solution=LabN -t:Build
-dotnet build Build.proj -p:Solution=LabN -t:Run
-dotnet build Build.proj -p:Solution=LabN -t:Test
+Build.proj<br>
+dotnet build Build.proj -p:Solution=LabN -t:Build<br>
+dotnet build Build.proj -p:Solution=LabN -t:Run<br>
+dotnet build Build.proj -p:Solution=LabN -t:Test<br>
 
 #(Lab1)
 Вказано натуральне число x. Знайдіть число способів подати його у вигляді суми чотирьох натуральних чисел: x = a + b + c + d, де a ≤ b ≤ c ≤ d.
