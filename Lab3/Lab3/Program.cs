@@ -10,8 +10,8 @@ namespace Lab3
         // Определение ходов коня
         static readonly (int, int)[] MOVES = new (int, int)[]
         {
-        (-2, -1), (-1, -2), (1, -2), (2, -1),
-        (2, 1), (1, 2), (-1, 2), (-2, 1)
+            (-2, -1), (-1, -2), (1, -2), (2, -1),
+            (2, 1), (1, 2), (-1, 2), (-2, 1)
         };
 
         public static void Main(string[] args)
