@@ -7,13 +7,18 @@ namespace Lab1
     {
         public static void Main(string[] args)
         {
+            // Определение относительных путей для входного и выходного файлов
+            string rootDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
+            string inputPath = Path.Combine(rootDirectory, "INPUT.TXT");
+            string outputPath = Path.Combine(rootDirectory, "OUTPUT.TXT");
+
+            RunLab(inputPath, outputPath);
+        }
+
+        public static void RunLab(string inputPath, string outputPath)
+        {
             try
             {
-                // Определение относительных путей для входного и выходного файлов
-                string rootDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-                string inputPath = Path.Combine(rootDirectory, "INPUT.TXT");
-                string outputPath = Path.Combine(rootDirectory, "OUTPUT.TXT");
-
                 // Чтение данных из входного файла
                 string[] inputData = GetDataFromFile(inputPath);
 

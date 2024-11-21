@@ -21,6 +21,11 @@ namespace Lab3
             string inputPath = Path.Combine(rootDirectory, "INPUT.TXT");
             string outputPath = Path.Combine(rootDirectory, "OUTPUT.TXT");
 
+            RunLab(inputPath, outputPath);
+        }
+
+        public static void RunLab(string inputPath, string outputPath)
+        {
             // Чтение данных из входного файла
             var inputLines = File.ReadAllLines(inputPath);
 

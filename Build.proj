@@ -6,11 +6,6 @@
 		<NoWarn>CS8603;CS8625;NU1903</NoWarn>
 	</PropertyGroup>
 
-	<!-- Установка кодировки консоли в UTF-8 -->
-	<Target Name="SetConsoleEncoding">
-		<Exec Command="chcp 65001" />
-	</Target>
-
 	<Target Name="Build">
 		<Message Text="Building $(Solution)" Importance="high" />
 		<Exec Command="dotnet build $(Solution)/$(Solution)/$(Solution).csproj" />
